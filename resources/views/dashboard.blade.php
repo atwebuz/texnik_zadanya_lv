@@ -28,6 +28,9 @@
                                     <div class="flex items-center space-x-8">
                                         <button
                                             class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">id: {{$application->id}}</button>
+                                            <a href="mailto:{{$application->user->email}}" class="text-gray-500">
+                                                {{$application->user->email}}
+                                            </a>
                                         <div class="text-xs text-neutral-500">  </div>
                                     </div>
                                 </div>
@@ -40,15 +43,23 @@
                                         <div class="text-sm text-neutral-600">                                   
                                              {{$application->message}}
                                         </div>
+                                        <div class="text-sm text-neutral-600">                                   
+                                            {{$application->created_at}}
+                                       </div>
+                                        
                                     </div>
+                                    
 
                                     <div class="border p-6 rounded hover:bg-gray-100 transition cursor-pointer">
                                    @if(is_null($application->file_url) )
                                         <p target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
-                                              </svg>                                                
+                                              </svg>   
+                                              
+                                              
                                           </p>
+                                          
     
                                     @else
 
@@ -59,19 +70,31 @@
                                           
                                       </a>
                                     @endif
+
+                                    
                                         
                                     </div>
                                 </div>
 
-                                <div class="box flex justify-between">
-                                 <p>
-                                    {{$application->user->email}}
-                                </p>
+                                @if($application->answer()->exists())
+                                <span class="font-bold">Answer:</span>
+                                <p class="text-green-500"> {{$application->answer->body}}</p>  
 
-                                <p>
-                                   {{$application->created_at}}
-                                </p>
+                                @else
+                                <div class="flex">
+                                    
+                                    <a href="{{route('answers.create', ['application' => $application->id])}}"
+                                    type="button"
+                                    class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-1 my-2 transition duration-500 ease select-none  "
+                                  >
+                                    Answer
+                                  </a>
                                 </div>
+
+                                @endif
+
+           
+                            
                                
                             </div>
                         </div>
