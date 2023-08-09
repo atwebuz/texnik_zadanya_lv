@@ -9,6 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @if(session()->has('error'))
+                     <div class="w-full mb-2 select-none border-l-4 border-blue-400 bg-blue-100 p-4 font-medium hover:border-blue-500">{{session()->get('error')}}</div>
+                     @endif
+
                     @if(auth()->user()->role->name == 'manager' )
 
                     {{ __("Manager") }}
@@ -53,6 +57,7 @@
 
                     {{$applications->links()}}
                     
+                
 
                     @else
 
