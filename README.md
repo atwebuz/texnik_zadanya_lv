@@ -71,3 +71,7 @@ ____
 ____
 
     php artisan storage:link
+____
+    php artisan make:mail ApplicationCreated
+____
+    php artisan queue:listen
