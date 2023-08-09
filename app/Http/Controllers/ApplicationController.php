@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Jobs\SendEmailJob;
 use App\Mail\ApplicationCreated;
 use App\Models\Application;
@@ -25,7 +26,7 @@ class ApplicationController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
 
         if (!$this->canCreateApplication()) {
@@ -41,11 +42,6 @@ class ApplicationController extends Controller
                 'public',
             );
         }
-        $request->validate([
-            'subject' => 'required',
-            'message' => 'required',
-            'file' => 'file|mimes:jpg,png,pdf,docx',
-        ]);
 
         $application = Application::create([
             'user_id' => auth()->user()->id,
