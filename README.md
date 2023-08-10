@@ -2,7 +2,7 @@
 
 
 ## audio to text
-![Screen 1](./public/storage/files/db.png)
+![Screen 1](./github/db.png)
 ____
     php artisan stub:publish
 ____
