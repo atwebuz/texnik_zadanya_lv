@@ -17,7 +17,9 @@ class ApplicationController extends Controller
  
     public function index()
     {
-        //
+        return view('applications.index')->with([
+            'applications'=> auth()->user()->applications()->latest()->paginate(10),
+        ]);
     }
 
   
